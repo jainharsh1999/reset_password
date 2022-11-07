@@ -45,13 +45,13 @@ def reset_password(request):
 
         if not employee.objects.filter(email=email):
             messages.success(request,'No user found!')
-            return redirect('forgetpassword')
+            return redirect('reset_password')
         else:
             user_obj=employee.objects.get(email=email)
             token=str(uuid.uuid4())
             send_forget_password_mail(user_obj,token)
             messages.success(request,'An email is sent')    
-            return redirect('forgetpassword')
+            return redirect('reset_password')
     return render(request,"reset_password.html")
     
 def passwordResetConfirm(request, uidb64, token):    
